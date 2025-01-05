@@ -2,6 +2,7 @@ package hello.itemservice.web.form;
 
 import hello.itemservice.domain.item.Item;
 import hello.itemservice.domain.item.ItemRepository;
+import hello.itemservice.domain.item.ItemType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,7 @@ public class FormItemController {
 
     private final ItemRepository itemRepository;
 
+    // 체크박스 value
     @ModelAttribute("regions") // 이렇게 하면 FormItemController 에서 응답하는 모든 model 에 정의된 객체가 자동으로 담긴다
     public Map<String ,String> regions() {
         Map<String, String> regions = new LinkedHashMap<>();
@@ -30,6 +32,12 @@ public class FormItemController {
         regions.put("BUSAN", "부산");
         regions.put("JEJU", "제주");
         return regions;
+    }
+
+    // 라디오 체크 value
+    @ModelAttribute("itemTypes")
+    public ItemType[] itemTypes() {
+        return ItemType.values();
     }
 
     @GetMapping
