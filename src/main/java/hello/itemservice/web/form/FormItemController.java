@@ -37,7 +37,7 @@ public class FormItemController {
     // 라디오 체크 value
     @ModelAttribute("itemTypes")
     public ItemType[] itemTypes() {
-        return ItemType.values();
+        return ItemType.values(); // 이렇게 작성하면 미리 만들어둔 enum 을 배열로 넘겨줄 수 있음
     }
 
     @GetMapping
@@ -64,6 +64,7 @@ public class FormItemController {
     public String addItem(@ModelAttribute Item item, RedirectAttributes redirectAttributes) {
         log.info("item.open = {}", item.getOpen());
         log.info("item.regions = {}", item.getRegions());
+        log.info("item.itemType = {}", item.getItemType());
 
         Item savedItem = itemRepository.save(item);
         redirectAttributes.addAttribute("itemId", savedItem.getId());
